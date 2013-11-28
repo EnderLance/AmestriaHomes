@@ -142,21 +142,13 @@ public class Homes extends JavaPlugin implements EventListener
 					double locX = loc.getX();
 					double locY = loc.getY();
 					double locZ = loc.getZ();
-					int number = Integer.parseInt(args[0]);
-					if(number < 5)
+					if(player.hasPermission("amestriahomes.home."+args[0]))
 					{
-						setHome(player, locX, locY, locZ, args[0]);
+						setHome(player, locX, locY, locZ, args[0]);	
 					}
-					else if(number > 4)
+					else if(!player.hasPermission("amestriahomes.home."+args[0]))
 					{
-						if(player.hasPermission("amestriahomes.unlimited"))
-						{
-							setHome(player, locX, locY, locZ, args[0]);
-						}
-						else if(!(player.hasPermission("amestriahomes.unlimited")))
-						{
-							player.sendMessage(ChatColor.RED + "You can only have up to four homes.");
-						}
+						player.sendMessage(ChatColor.RED + "You do not have permission to set that home.");
 					}
 				}
 				else if(args.length != 1)
@@ -168,42 +160,28 @@ public class Homes extends JavaPlugin implements EventListener
 			{	
 				if(args.length == 1) 
 				{
-					int number = Integer.parseInt(args[0]);
-					if(number < 5)
+					if(player.hasPermission("amestriahomes.home."+args[0]))
 					{
 						goHome(player, args[0]);
 					}
-					else if(number > 4)
+					else if(!player.hasPermission("amestriahomes.home."+args[0]))
 					{
-						if(player.hasPermission("amestriahomes.unlimited"))
-						{
-							goHome(player, args[0]);
-						}
-						else if(!(player.hasPermission("amestriahomes.unlimited")))
-						{
-							player.sendMessage(ChatColor.RED + "Please Specify a Number Between 1 and 4.");
-						}
+						player.sendMessage(ChatColor.RED + "You do not have permission to use that home.");
 					}
 				}
 				else if(args.length == 2) 
 				{
 					if(player.hasPermission("amestriahomes.others"))
 					{
-						int number = Integer.parseInt(args[0]);
 						Player target = Bukkit.getServer().getPlayer(args[1]);
-						if(number < 5)
+						if(target.hasPermission("amestriahomes.home."+args[0]))
 						{
 							goHome(target, args[0]);
 							player.sendMessage(ChatColor.GOLD + "You have teleported " + target.getName() + " home.");
 						}
-						else if(number > 4)
+						else if(!target.hasPermission("amestriahomes.home."+args[0]))
 						{
-							if(target.hasPermission("amestriahomes.unlimited"))
-							{
-								goHome(target, args[0]);
-								player.sendMessage(ChatColor.GOLD + "You have teleported " + target.getName() + " home.");
-							}
-							player.sendMessage(ChatColor.RED + "Please Specify a Number Between 1 and 16.");
+							player.sendMessage(ChatColor.RED + target.getName() + " cannot be teleported to that home.");
 						}
 					}
 					else if(!(player.hasPermission("amestriahomes.others")))
