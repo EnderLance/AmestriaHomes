@@ -1,0 +1,12 @@
+name: Amestria Homes
+authors: [EnderLance, Ethanol2906]
+main: me.Amestria.AmestriaHomes.Homes
+version: 0.1
+description: Custom homes plugin for Amestria.
+commands:
+  sethome:
+    description: Sets a home at current location.
+  home:
+    description: Teleports user to specified home.
+  blacklist:
+    description: Blacklist a world!
